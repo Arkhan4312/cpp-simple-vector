@@ -18,9 +18,7 @@ class ArrayPtr {
 
     ArrayPtr& operator=(ArrayPtr&& other) noexcept {
         if (this != &other) {
-            delete[] ptr_;
-            ptr_ = other.ptr_;
-            other.ptr_ = nullptr;
+            Swap(other);
         }
         return *this;
     }
@@ -56,22 +54,6 @@ class ArrayPtr {
 
     Type& operator[](size_t index) const noexcept {
         return ptr_[index];
-    }
-
-    Type* operator+(size_t shift) const noexcept {
-        return ptr_ + shift;
-    }
-
-    Type* operator-(size_t shift) const noexcept {
-        return ptr_ - shift;
-    }
-
-    bool operator==(const ArrayPtr& other) const noexcept {
-        return ptr_ == other.ptr_;
-    }
-
-    bool operator!=(const ArrayPtr& other) const noexcept {
-        return !(ptr_==other.ptr_);
     }
 
     private:
